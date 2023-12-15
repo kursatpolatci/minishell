@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 15:14:20 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/10/23 23:08:20 by kpolatci         ###   ########.fr       */
+/*   Created: 2023/12/10 05:53:53 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/12/10 05:54:01 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+
+#include "../minishell.h"	
 
 int	ft_is_whitespaces(char c)
 {

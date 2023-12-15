@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:07 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/10/23 23:57:00 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/15 08:47:27 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	ft_process(void)
 			ft_error();
 		split = ft_create_split(str);
 		parser = ft_createnodes(split);
+		determine_type(parser);
+		remove_quo_pars(parser);
 		ft_printlist(parser);
 	}
 }

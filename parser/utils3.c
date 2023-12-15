@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:47:15 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/10/23 23:50:07 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/14 06:36:23 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ int	ft_strlen(char *str)
 	len = 0;
 	if (!str)
 		return (0);
+	while (str[len])
+		len++;
+	return (len);
+}
+
+int	ft_strlen2(char **str)
+{
+	int	len;
+
+	len = 0;
 	while (str[len])
 		len++;
 	return (len);
