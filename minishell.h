@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <readline/readline.h>
+# include <limits.h>
 
 enum e_token
 {
@@ -41,6 +42,7 @@ void		ft_nodeadd_back(t_parser **pars, t_parser *new);
 t_parser	*ft_nodenew(char *str);
 t_parser	*ft_createnodes(char **str);
 void		ft_printlist(t_parser *parser);
+int			ft_arg_count(t_parser *main);
 
 // parser
 int			ft_is_single_quote(char *str);
@@ -77,4 +79,10 @@ void		determine_type(t_parser *pars);
 // temp	
 void		ft_print_split(char **str);
 void		ft_error(void);
+
+// builtins
+void	ft_echo(t_parser *main);
+void	ft_pwd(void);
+void	ft_exit(t_parser *main);
+
 #endif

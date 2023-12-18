@@ -52,3 +52,16 @@ t_parser	*ft_createnodes(char **str)
 		ft_nodeadd_back(&parser, ft_nodenew(ft_strdup(str[index])));
 	return (parser);
 }
+
+int	ft_arg_count(t_parser *main)
+{
+	int	len;
+
+	len = 0;
+	while (main->next)
+	{
+		len++;
+		main = main->next;
+	}
+	return (len);
+}
