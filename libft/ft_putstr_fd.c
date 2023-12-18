@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 20:07:08 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/01 20:20:15 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 16:51:11 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 16:51:11 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	unsigned int	i;
-
-	i = 0;
 	if (!s)
 		return ;
-	while (s[i])
-	{
-		write (fd, &s[i], 1);
-		i++;
-	}
+	write(fd, s, ft_strlen(s));
 }
+
+/*
+#include <fcntl.h>
+int main()
+{
+    int file = open("merhaba.txt", O_CREAT | O_RDWR, 0777);
+    ft_putstr_fd("kursat polatci\n",file);
+}*/

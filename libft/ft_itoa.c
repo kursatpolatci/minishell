@@ -3,67 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/30 22:15:40 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/13 10:03:44 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 16:35:46 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 16:35:46 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	len(long nb)
+static size_t	get_digits(int n)
 {
-	int	len;
+	size_t	count;
 
-	len = 0;
-	if (nb == 0)
-		return (1);
-	if (nb < 0)
+	count = 0;
+	if (n <= 0)
+		count++;
+	while (n)
 	{
-		nb *= -1;
-		len++;
+		n /= 10;
+		count++;
 	}
-	while (nb > 0)
-	{
-		nb /= 10;
-		len++;
-	}
-	return (len);
+	return (count);
 }
 
-char	*print_zero(char *dest, int n)
+char	*ft_itoa(int n)
 {
-	if (n == 0)
-	{
-		dest[0] = '0';
-	}
-	return (dest);
-}
+	char		*str;
+	size_t		len;
+	const char	*digits;
 
-char	*ft_itoa(int nb)
-{
-	char	*str;
-	long	n;
-	int		i;
-
-	n = nb;
-	i = len(n);
-	str = (char *)malloc(i + 1);
+	digits = "0123456789";
+	len = get_digits(n);
+	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
-	str[i--] = '\0';
+	str[len--] = '\0';
 	if (n == 0)
-		return (print_zero(str, 0));
+		str[0] = '0';
 	if (n < 0)
-	{
 		str[0] = '-';
-		n *= -1;
-	}
-	while (n > 0)
+	while (n)
 	{
-		str[i--] = 48 + (n % 10);
+		if (n > 0)
+			str[len--] = digits[n % 10];
+		else
+			str[len--] = digits[n % 10 * -1];
 		n /= 10;
 	}
 	return (str);
 }
+
+/*
+#include <stdio.h>
+int main() 
+{
+	int	a = -6;
+	printf("%s\n", ft_itoa(a));
+
+    int	b = -52352345;
+	printf("%s\n", ft_itoa(b));
+
+    int	c = 123123423;
+	printf("%s\n", ft_itoa(c));
+
+    int	d = 5;
+	printf("%s\n", ft_itoa(d));
+
+	int	e = 0;
+	printf("%s\n", ft_itoa(e));
+	return(0);
+}*/

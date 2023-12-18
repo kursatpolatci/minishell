@@ -3,58 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/05 14:07:08 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/12 01:06:07 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 18:25:28 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/15 06:29:41 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned int	str_in_array(const char *s, char delimiter)
+size_t	ft_count_word(char const *s, char c)
 {
-	unsigned int	count;
+	size_t	i;
+	size_t	count;
 
+	i = 0;
 	count = 0;
-	while (*s)
+	while (s[i] == c && s[i])
+		i++;
+	while (s[i])
 	{
-		if (*s == delimiter)
-			s++;
-		else
-		{
-			while (*s != delimiter && *s)
-				s++;
-			count++;
-		}
+		while (s[i] != c && s[i])
+			i++;
+		count++;
+		while (s[i] == c && s[i])
+			i++;
 	}
 	return (count);
 }
 
+char	*ft_strcreate(const char *s, char c, size_t i)
+{
+	size_t	len;
+	size_t	tmp;
+
+	len = 0;
+	tmp = i;
+	while (s[tmp] != c && s[tmp])
+	{
+		tmp++;
+		len++;
+	}
+	return (ft_substr(s, i, len));
+}
+
 char	**ft_split(char const *s, char c)
 {
-	char			**arr;
-	unsigned int	j;
-	unsigned int	a;
+	size_t	i;
+	size_t	res_i;
+	char	**res;
 
 	if (!s)
 		return (NULL);
-	arr = (char **) ft_calloc(str_in_array(s, c) + 1, sizeof(char *));
-	if (!arr)
+	res = (char **)malloc((ft_count_word(s, c) + 1) * sizeof(char *));
+	if (!res)
 		return (NULL);
-	a = 0;
-	while (*s)
+	i = 0;
+	res_i = 0;
+	while (s[i])
 	{
-		if (*s == c)
-			s++;
-		else
+		while (s[i] == c && s[i])
+			i++;
+		if (s[i])
 		{
-			j = 0;
-			while (*s != c && *s && ++j)
-				s++;
-			arr[++a -1] = (char *) ft_calloc(j + 1, sizeof(char));
-			ft_strlcpy(arr[a -1], s - j, j + 1);
+			res[res_i] = ft_strcreate(s, c, i);
+			res_i++;
 		}
+		while (s[i] != c && s[i])
+			i++;
 	}
-	return (arr);
+	res[res_i] = 0;
+	return (res);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	char *str = "***merhaba*kursat***polatci*nasilsin*1";
+	char **split = ft_split(str,'*');
+
+	while(*split)
+	{
+		printf("%s\n",*split);
+		split++;
+	}
+}*/

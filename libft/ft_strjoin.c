@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/30 17:34:14 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/12 00:20:55 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 16:53:03 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 16:53:03 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,37 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*dest;
-	size_t	i;
-	size_t	j;
+	char	*new_str;
+	int		i;
+	int		j;
 
 	if (!s1 || !s2)
 		return (0);
-	dest = malloc (sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!dest)
-		return (0);
-	i = -1;
-	j = -1;
-	while (s1[++i])
-		dest[i] = s1[i];
-	while (s2[++j])
-		dest[i++] = s2[j];
-	dest[i] = '\0';
-	return (dest);
+	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		new_str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j] != '\0')
+		new_str[i++] = s2[j++];
+	new_str[i] = '\0';
+	return (new_str);
 }
+
+/*
+#include<stdio.h>
+int	main()
+{
+	char s1[] = "Kursat ";
+	char s2[] = "Polatci";
+    char *s3 = ft_strjoin(s1, s2);
+	printf("%s\n", s3);
+
+    char *s4 = ft_strjoin(s3, " Nasilsin");
+    printf("%s\n",s4);
+}*/

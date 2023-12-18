@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 12:03:50 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/09 16:28:34 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 16:52:33 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 16:52:33 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,28 @@
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	i;
+	size_t	i;
 
-	if (!f || !s)
-		return ;
 	i = 0;
-	while (s[i])
+	if (!s)
+		return ;
+	while (s[i] != '\0')
 	{
-		(*f)(i, &s[i]);
+		f(i, s + i);
 		i++;
 	}
 }
+
+/*
+#include <stdio.h>
+void	funct(unsigned int a, char *b)
+{
+	*b = *b+a;
+}
+
+int main()
+{
+	char dizi[] = "aaaaaaaaaaaaaaaa";
+	ft_striteri(dizi, funct);
+	printf("%s",dizi);
+}*/

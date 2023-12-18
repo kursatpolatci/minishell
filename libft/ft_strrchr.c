@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 09:48:47 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/12 10:12:31 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 17:03:21 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 17:03:21 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,29 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	char	*start;
 
-	i = ft_strlen(s);
-	while (i >= 0)
+	start = (char *)s;
+	while (*s)
+		s++;
+	while (s >= start)
 	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
-		i--;
+		if (*((char *)s) == (char)c)
+			return ((char *)s);
+		s--;
 	}
-	return (0);
+	return (NULL);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	const char s[] = "Polatci Kursat";
+	printf("%s,\n", ft_strrchr(s, 'z'));
+    printf("%s,\n", ft_strrchr(s, 'b'));
+	printf("%s,\n", ft_strrchr(s, ' '));
+    printf("%s,\n", ft_strrchr(s, 'a'));
+
+	return 0;
+}*/

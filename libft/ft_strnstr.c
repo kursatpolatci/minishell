@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 14:01:55 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/13 13:46:23 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 17:02:11 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 17:02:11 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,34 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
+	size_t	needle_len;
 	size_t	i;
-	size_t	j;
-	size_t	nlen;
 
-	nlen = ft_strlen(needle);
-	if (nlen == 0)
-		return ((char *)haystack);
 	i = 0;
-	while (haystack[i] && ((i + nlen) <= len))
+	needle_len = ft_strlen(needle);
+	if (!needle_len)
+		return ((char *)haystack);
+	while (haystack[i] && needle_len <= len)
 	{
-		j = 0;
-		while (haystack[i + j] == needle[j])
-		{
-			if (j == nlen - 1)
-				return ((char *) &haystack[i]);
-			j++;
-		}
+		if (ft_strncmp(&haystack[i], needle, needle_len) == 0)
+			return ((char *)&haystack[i]);
 		i++;
+		len--;
 	}
-	return (0); 
+	return (0);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	char a[] = "beyza";
+	char b[] = "ey";
+
+	printf("%s,\n", ft_strnstr(a, b, 0));
+    printf("%s,\n", ft_strnstr(a, b, 1));
+    printf("%s,\n", ft_strnstr(a, b, 2));
+    printf("%s,\n", ft_strnstr(a, b, 3));
+    printf("%s,\n", ft_strnstr(a, b, 4));
+	return 0;
+}*/

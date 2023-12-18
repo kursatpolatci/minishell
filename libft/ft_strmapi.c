@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 11:21:42 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/12 00:23:29 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 16:56:24 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 16:56:24 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,44 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
+	char			*str;
 	unsigned int	i;
-	size_t			slen;
-	char			*dest;
 
-	if (!s || !f)
-		return (0);
-	slen = ft_strlen(s);
-	dest = malloc (sizeof(char) * slen + 1);
-	if (!dest)
-		return (0);
+	if (!s)
+		return (NULL);
+	str = (char *)malloc(ft_strlen(s) + 1);
+	if (!str)
+		return (NULL);
 	i = 0;
-	while (s[i])
+	while (s[i] != '\0')
 	{
-		dest[i] = (*f)(i, s[i]);
+		str[i] = (*f)(i, s[i]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	str[i] = '\0';
+	return (str);
 }
+
+/*
+#include <stdio.h>
+char	f1(unsigned int i, char s)
+{
+	if (ft_isalpha(s))
+		return s + i;
+	return s;
+}
+
+char f2(unsigned int i, char s)
+{
+    return '*';
+}
+
+int main() {
+	char b[] = "Kursat Polatci";
+	printf("%s\n", ft_strmapi(b, &f1));
+
+    printf("------------------\n");
+
+	char c[] = "Kursat Polatci";
+	printf("%s\n", ft_strmapi(c, &f2));
+}*/

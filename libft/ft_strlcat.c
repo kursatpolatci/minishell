@@ -3,34 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/05 13:52:33 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/11 23:38:04 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 16:55:15 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 16:55:15 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char	*dst, const char *src, size_t dstsize)
+size_t	ft_strlcat(char *dest, char *src, size_t size)
 {
-	size_t	i;
-	size_t	a;
-	size_t	sizedst;
-	size_t	sizesrc;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	dlen;
+	unsigned int	slen;
 
-	sizedst = ft_strlen(dst);
-	sizesrc = ft_strlen(src);
-	a = ft_strlen(dst);
-	if (dstsize <= sizedst)
-		return (dstsize + sizesrc);
 	i = 0;
-	while (src[i] != '\0' && a < dstsize - 1)
+	j = 0;
+	while (dest[j] != '\0')
 	{
-		dst[a] = src[i];
-		a++;
-		i++;
+		j++;
 	}
-	dst[a] = '\0';
-	return (sizedst + sizesrc);
+	dlen = j;
+	slen = ft_strlen(src);
+	if (size == 0 || size <= dlen)
+		return (slen + size);
+	while (src[i] != '\0' && i < size - dlen - 1)
+	{
+		dest[j] = src[i];
+		i++;
+		j++;
+	}
+	dest[j] = '\0';
+	return (dlen + slen);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+    char dest[20] = "Kursat Polatci";
+	char src[] = "Nbr?";
+
+	printf("%zu - %s\n", ft_strlcat(dest, src, 28), dest);
+
+    char dest1[] = "Kursat";
+	char src1[] = "Polatci";
+
+    printf("%zu - %s\n", ft_strlcat(dest1, src1, 9), dest1);
+
+    char dest2[] = "Hey";
+	char src2[] = "Naber";
+
+    printf("%zu - %s\n", ft_strlcat(dest2, src2, 9), dest2);
+	return 0;
+}*/

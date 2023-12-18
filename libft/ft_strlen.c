@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 13:43:03 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/09 15:39:55 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 16:56:20 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 16:56:20 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
-	{
 		i++;
-	}
 	return (i);
 }
+
+/*
+#include <stdio.h>
+int main() {
+	char *b = "Kursat";
+	printf("%zu", ft_strlen(b));
+}*/

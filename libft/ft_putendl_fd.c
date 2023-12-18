@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
+/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 20:33:44 by fatturan          #+#    #+#             */
-/*   Updated: 2023/07/01 20:40:41 by fatturan         ###   ########.fr       */
+/*   Created: 2023/07/11 16:50:28 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/07/11 16:50:28 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	ft_putendl_fd(char const *s, int fd)
 {
-	unsigned int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
-	{
-		write (fd, &s[i], 1);
-		i++;
-	}
-	write (fd, "\n", 1);
+	if (s)
+		while (*s != '\0')
+			ft_putchar_fd(*s++, fd);
+	ft_putchar_fd('\n', fd);
 }
+
+/*
+#include <fcntl.h>
+int main() {
+	int fd = open("putendl.txt", O_CREAT | O_RDWR, 0777);
+	ft_putendl_fd("Kursat", fd);
+	ft_putendl_fd("Polatci", fd);
+}*/
