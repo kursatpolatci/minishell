@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:47:15 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/14 06:36:23 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/20 10:30:37 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-int	ft_strlen2(char **str)
+int	ft_strlen_split(char **str)
 {
 	int	len;
 

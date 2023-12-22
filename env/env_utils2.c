@@ -1,30 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 16:13:02 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/07/11 16:13:02 by kpolatci         ###   ########.fr       */
+/*   Created: 2023/12/21 07:52:01 by kpolatci          #+#    #+#             */
+/*   Updated: 2023/12/21 07:52:16 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-int	ft_isalpha(int c)
-{
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
-	return (0);
-}
-
-/*
-#include <stdio.h>
-int main()
-{
-    printf("a -> %d\n",ft_isalpha('a'));
-    printf("A -> %d\n",ft_isalpha('A'));
-    printf("5 -> %d\n",ft_isalpha('5'));
-    printf("& -> %d\n",ft_isalpha('&'));
-}*/

@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 20:41:49 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/15 02:24:32 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:48:40 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	ft_print_split(char **str)
 	int	index;
 
 	index = 0;
-	while (str[index])
+	if (!(*str))
+		return ;
+	while (str[index] != NULL)
 	{
 		printf("%s\n", str[index]);
 		index++;

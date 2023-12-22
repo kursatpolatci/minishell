@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:07 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/15 08:47:27 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/22 07:28:38 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_is_single_quote(char *str)
 	return (0);
 }
 
-char	*ft_substring(char *str, int start, int end)
+char	*ft_substr(char *str, int start, int end)
 {
 	char	*sub;
 	int		index;
@@ -70,7 +70,7 @@ char	**ft_create_split(char *str)
 	{
 		temp = index;
 		pass_word(str, &index, &temp);
-		split[split_index++] = ft_substring(str, temp - 1, index - 1);
+		split[split_index++] = ft_substr(str, temp - 1, index - 1);
 		pass_whitespaces(str, &index);
 	}
 	split[split_index] = 0;
@@ -92,6 +92,7 @@ void	ft_process(void)
 		split = ft_create_split(str);
 		parser = ft_createnodes(split);
 		determine_type(parser);
+		
 		remove_quo_pars(parser);
 		ft_printlist(parser);
 	}
