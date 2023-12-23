@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:13 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/22 07:28:38 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/23 06:17:01 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,8 @@ void		count_dollar(char *str, int *index, int *len);
 
 // env utils2
 
+
+
+char	*create_env(char *str);
+void	copy_env(char *str, char *new_env, int *new_i, int *str_i);
 #endif

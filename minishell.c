@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:13 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/22 09:30:21 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/23 08:10:47 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,16 @@ int	main(int argc, char **argv)
 	//printf("count: %d\n", count_for_env("\"$u.asd\""));
 	//printf("count: %d\n", count_for_env("$a"));
 	//printf("count: %d\n", count_for_env("$ "));
+	
+	
+	//printf("%s\n", create_env("\'naber\'"));
+	//printf("%s\n", create_env("\'$asd.naber\'"));
+	//printf("%s\n", create_env("\"$asd.naber\""));
+	//printf("%s\n", create_env("\"$USER.naber\""));
+	//printf("%s\n", create_env("\"$USERr.naber\""));
+	//printf("%s\n", create_env("\"$USERr.naber\'$USER\'\""));
+	//printf("%s\n", create_env("\"$USERr.naber\'$USER\'\""));
+	printf("%s\n", create_env("$USER"));
+	printf("%s\n", create_env("$USER$HOME"));
 	//ft_process(); 
 }
