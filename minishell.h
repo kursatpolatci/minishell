@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:13 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/23 06:17:01 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/24 07:08:16 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int			ft_find_str(char *str, char *c, int *index);
 int			ft_strlen(char *str);
 int			ft_strlen_split(char **str);
 void		ft_strlcpy(char *src, char *dst, int size);
-char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strdup(char *str);
+int			ft_find_char(char *str, char c);
 
 // utils4
 void		remove_quo_pars(t_parser *pars);
@@ -86,19 +86,21 @@ void		ft_pwd(void);
 void		ft_exit(t_parser *main);
 
 // env
-int			is_special_char(char c);
-char		*dollar_substr(char *str, int index);
-char		*dollar_value(char *str, char **g_env);
+char		*create_env(char *node_str);
+void		copy_env(char *src, char *dest, int *dest_i, int *src_i);
+void		copy_env_single_quo(char *src, char *dest, int *dest_i, int *src_i);
+void		copy_env_double_quo(char *src, char *dest, int *dest_i, int *src_i);
+void		copy_env_dollar(char *src, char *dest, int *dest_i, int *src_i);
 
 // env utils1
 int			count_for_env(char *str);
-void		count_for_env_exp(char *str, char c, int *index, int *len);
 void		count_dollar(char *str, int *index, int *len);
+void		count_for_single_quo(char *str, char c, int *index, int *len);
+void		count_for_double_quo(char *str, char c, int *index, int *len);
 
 // env utils2
+int			is_special_char(char c);
+char		*dollar_substr(char *str, int index);
+char		*dollar_value(char *dol_sub, char **t_glb);
 
-
-
-char	*create_env(char *str);
-void	copy_env(char *str, char *new_env, int *new_i, int *str_i);
 #endif

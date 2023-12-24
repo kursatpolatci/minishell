@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 07:52:01 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/23 06:49:53 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/24 04:53:26 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char	*dollar_substr(char *str, int index)
 
 	index++;
 	inception = index;
-
 	if (is_special_char(str[index]) || !str[index])
 		return (ft_strdup("$"));
 	while (!is_special_char(str[index]) && str[index])
@@ -34,7 +33,7 @@ char	*dollar_substr(char *str, int index)
 	return (ft_substr(str, inception, index - 1));
 }
 
-char	*dollar_value(char *dol_sub, char **env)
+char	*dollar_value(char *dol_sub, char **t_glb)
 {
 	int	i_env;
 	int	i;
@@ -42,17 +41,17 @@ char	*dollar_value(char *dol_sub, char **env)
 	i_env = 0;
 	if (dol_sub[0] == '$')
 		return (ft_strdup("$"));
-	while (env[i_env])
+	while (t_glb[i_env])
 	{
 		i = 0;
-		while (dol_sub[i])
+		while (t_glb[i_env][i] != '=' && dol_sub[i] && t_glb[i_env][i])
 		{
-			if (env[i_env][i] != dol_sub[i])
+			if (t_glb[i_env][i] != dol_sub[i])
 				break ;
 			i++;
 		}
-		if (!dol_sub[i])
-			return (ft_substr(env[i_env], ++i, ft_strlen(env[i_env]) - 1));
+		if (t_glb[i_env][i] == '=' && !dol_sub[i])
+			return (ft_substr(t_glb[i_env], ++i, ft_strlen(t_glb[i_env]) - 1));
 		i_env++;
 	}
 	return (ft_strdup(""));

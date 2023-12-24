@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 20:41:49 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/20 13:48:40 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/24 07:21:13 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_printlist(t_parser *parser)
 {
 	while (parser != NULL)
 	{
-		printf("%s   => Type: %d\n", parser->str, parser->type);
+		//printf("%s   => Type: %d\n", parser->str, parser->type);
+		printf("\n%s\n", parser->str);
 		parser = parser->next;
 	}
 }

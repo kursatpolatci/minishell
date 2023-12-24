@@ -6,81 +6,97 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:35:23 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/23 08:10:52 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/24 07:21:19 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*create_env(char *str)
+char	*create_env(char *node_str)
 {
 	char	*new_env;
 	int		new_i;
-	int		str_i;
-	int		temp;
+	int		node_i;
 
-	new_env = malloc(sizeof(char) * count_for_env(str) + 1);
+	new_env = malloc(sizeof(char) * count_for_env(node_str) + 1);
 	new_i = 0;
-	str_i = 0;
-	while (str[str_i])
+	node_i = 0;
+	while (node_str[node_i])
 	{
-		if (str[str_i] == '\'' || str[str_i] == '\"' || 
-			str[str_i] == '$')
-			copy_env(str, new_env, &new_i, &str_i);
+		if (node_str[node_i] == '\'' || node_str[node_i] == '\"' || 
+			node_str[node_i] == '$')
+			copy_env(node_str, new_env, &new_i, &node_i);
 		else
-			new_env[new_i++] = str[str_i++];
+			new_env[new_i++] = node_str[node_i++];
 	}
 	new_env[new_i] = '\0';
 	return (new_env);
 }
 
-void	copy_env(char *str, char *new_env, int *new_i, int *str_i)
+void	copy_env(char *src, char *dest, int *dest_i, int *src_i)
 {
-	char	**g_env;
-	char	*new_str;
+	if (src[*src_i] == '\'')
+		copy_env_single_quo(src, dest, dest_i, src_i);
+	else if (src[*src_i] == '\"')
+		copy_env_double_quo(src, dest, dest_i, src_i);
+	else if (src[*src_i] == '$')
+		copy_env_dollar(src, dest, dest_i, src_i);
+}
 
-	g_env = (char **)malloc(sizeof(char *) * 4);
-	g_env[0] = "HOME=/home/kpolatci";
-	g_env[1] = "USER=kpolatci";
-	g_env[2] = "TERM_PROGRAM=vscode";
-	g_env[3] = 0;
-
+void	copy_env_single_quo(char *src, char *dest, int *dest_i, int *src_i)
+{
 	int		temp;
-	char	*temp_str;
-	if (str[*str_i] == '\'')
+
+	if (src[*src_i] == '\'')
 	{
-		temp = *str_i;
-		pass_quotes(str, str_i, str[*str_i]);
-		ft_strlcpy(str, (new_env + *new_i), (*str_i) - temp);
-		(*new_i) += (*str_i) - temp;
+		temp = *src_i;
+		pass_quotes(src, src_i, src[*src_i]);
+		ft_strlcpy(src, (dest + *dest_i), (*src_i) - temp);
+		(*dest_i) += (*src_i) - temp;
 	}
-	else if (str[*str_i] == '\"')
+}
+
+void	copy_env_double_quo(char *src, char *dest, int *dest_i, int *src_i)
+{
+	char	**t_glb;
+
+	t_glb = (char **)malloc(sizeof(char *) * 4);
+	t_glb[0] = "HOME=/home/kpolatci";
+	t_glb[1] = "USER=kpolatci";
+	t_glb[2] = "TERM_PROGRAM=vscode";
+	t_glb[3] = 0;
+	if (src[*src_i] == '\"')
 	{
-		new_env[(*new_i)++] = str[(*str_i)++];
-		while (str[*str_i] != '\"')
+		dest[(*dest_i)++] = src[(*src_i)++];
+		while (src[*src_i] != '\"' && src[*src_i])
 		{
-			if (str[*str_i] == '$')
-			{
-				temp_str = dollar_substr(str, *str_i);
-				temp_str = dollar_value(temp_str, g_env);
-				ft_strlcpy(temp_str, (new_env + *new_i), ft_strlen(temp_str));
-				(*new_i) += ft_strlen(temp_str);
-				(*str_i)++;
-				while (!is_special_char(str[(*str_i)]) && str[*str_i])
-					(*str_i)++;
-			}
-			new_env[(*new_i)++] = str[(*str_i)++];
+			if (src[*src_i] == '$')
+				copy_env_dollar(src, dest, dest_i, src_i);
+			dest[(*dest_i)++] = src[(*src_i)++];
 		}
-		new_env[(*new_i)++] = str[(*str_i)++];
+		dest[(*dest_i)++] = src[(*src_i)++];
 	}
-	else if (str[*str_i] == '$')
+}
+
+void	copy_env_dollar(char *src, char *dest, int *dest_i, int *src_i)
+{
+	char	**t_glb;
+
+	t_glb = (char **)malloc(sizeof(char *) * 4);
+	t_glb[0] = "HOME=/home/kpolatci";
+	t_glb[1] = "USER=kpolatci";
+	t_glb[2] = "TERM_PROGRAM=vscode";
+	t_glb[3] = 0;
+	char	*temp_str;
+
+	if (src[*src_i] == '$')
 	{
-		temp_str = dollar_substr(str, *str_i);
-		temp_str = dollar_value(temp_str, g_env);
-		ft_strlcpy(temp_str, (new_env + *new_i), ft_strlen(temp_str));
-		(*new_i) += ft_strlen(temp_str);
-		(*str_i)++;
-		while (!is_special_char(str[*str_i]) && str[*str_i])
-			(*str_i)++;
+		temp_str = dollar_substr(src, *src_i);
+		temp_str = dollar_value(temp_str, t_glb);
+		ft_strlcpy(temp_str, (dest + *dest_i), ft_strlen(temp_str));
+		(*dest_i) += ft_strlen(temp_str);
+		(*src_i)++;
+		while (!is_special_char(src[*src_i]) && src[*src_i])
+			(*src_i)++;
 	}
 }

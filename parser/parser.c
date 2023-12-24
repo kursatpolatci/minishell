@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:07 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/22 07:28:38 by kpolatci         ###   ########.fr       */
+/*   Updated: 2023/12/24 06:55:39 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,6 @@ int	ft_is_single_quote(char *str)
 	return (0);
 }
 
-char	*ft_substr(char *str, int start, int end)
-{
-	char	*sub;
-	int		index;
-
-	index = 0;
-	if (end >= ft_strlen(str))
-		return (0);
-	sub = (char *)malloc(sizeof(char) * end - start + 2);
-	sub[end - start + 1] = '\0';
-	while (start <= end)
-		sub[index++] = str[start++];
-	return (sub);
-}
-
 char	**ft_create_split(char *str)
 {
 	char	**split;
@@ -77,12 +62,21 @@ char	**ft_create_split(char *str)
 	return (split);
 }
 
+void	check_env(t_parser *parser)
+{
+	while (parser != NULL)
+	{
+		if (ft_find_char(parser->str, '$'))
+			parser->str = create_env(parser->str);
+		parser = parser->next;
+	}
+}
+
 void	ft_process(void)
 {
 	t_parser	*parser;
 	char		**split;
 	char		*str;
-	char		*temp;
 
 	while (1)
 	{
@@ -92,7 +86,7 @@ void	ft_process(void)
 		split = ft_create_split(str);
 		parser = ft_createnodes(split);
 		determine_type(parser);
-		
+		check_env(parser);
 		remove_quo_pars(parser);
 		ft_printlist(parser);
 	}
