@@ -6,12 +6,12 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:56:33 by fatturan          #+#    #+#             */
-/*   Updated: 2023/12/18 16:56:36 by fatturan         ###   ########.fr       */
+/*   Updated: 2023/12/25 15:08:08 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "../libft/libft.h"
+//#include "../libft/libft.h"
 
 static int	ft_exit_nbr(char *str)
 {

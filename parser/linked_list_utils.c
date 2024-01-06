@@ -6,7 +6,7 @@
 /*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:04:53 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/20 10:29:35 by kpolatci         ###   ########.fr       */
+/*   Updated: 2024/01/06 05:37:45 by kpolatci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_parser	*ft_nodelast(t_parser	*pars)
 {
-	while (pars->next != NULL)
+	while (pars != NULL && pars->next != NULL)
 		pars = pars->next;
 	return (pars);
 }
@@ -29,7 +29,7 @@ void	ft_nodeadd_back(t_parser **pars, t_parser *new)
 	ft_nodelast(*pars)->next = new;
 }
 
-t_parser	*ft_nodenew(char *str)
+t_parser	*ft_nodenew(char *str, t_parser *prev)
 {
 	t_parser	*new;
 
@@ -38,6 +38,7 @@ t_parser	*ft_nodenew(char *str)
 		return (NULL);
 	new->str = str;
 	new->next = NULL;
+	new->prev = ft_nodelast(prev);
 	return (new);
 }
 
@@ -50,7 +51,21 @@ t_parser	*ft_createnodes(char **str)
 	parser = NULL;
 	while (str[++index])
 		ft_nodeadd_back(&parser, ft_nodenew(ft_strdup(str[index])));
+	ft_add_prev_parser(parser);
 	return (parser);
+}
+
+void	ft_add_prev_parser(t_parser	*parser)
+{
+	t_parser	*temp;
+
+	temp = NULL;
+	while (parser)
+	{
+		parser->prev = temp;
+		temp = parser;
+		parser = parser->next;
+	}
 }
 
 int	ft_arg_count(t_parser *main)

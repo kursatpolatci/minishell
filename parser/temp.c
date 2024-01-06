@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   temp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 20:41:49 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/24 07:21:13 by kpolatci         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:59:22 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	ft_printlist(t_parser *parser)
 {
 	while (parser != NULL)
 	{
-		//printf("%s   => Type: %d\n", parser->str, parser->type);
-		printf("\n%s\n", parser->str);
+		printf("%s				", parser->prev);
+		printf("%s %p \n", parser->str, parser->str);
 		parser = parser->next;
 	}
 }

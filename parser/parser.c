@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:07 by kpolatci          #+#    #+#             */
-/*   Updated: 2023/12/24 06:55:39 by kpolatci         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:46:00 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,32 @@ void	check_env(t_parser *parser)
 	}
 }
 
+void	init_envair(char **env)
+{
+	int	i;
+
+	i = ft_strlen_split(env);
+	g_glbl.env = malloc(sizeof(char *) * (i + 1));
+	g_glbl.export = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i])
+	{
+		g_glbl.env[i] = ft_strdup(env[i]);
+		g_glbl.export[i] = ft_strdup(env[i]);
+		i++;
+	}
+	g_glbl.env[i] = NULL;
+	g_glbl.export[i] = NULL;
+}
+
 void	ft_process(void)
 {
 	t_parser	*parser;
 	char		**split;
 	char		*str;
 
+	//ft_print_split(g_glbl.export);
+	//exit(1);
 	while (1)
 	{
 		str = readline("bash$: ");
