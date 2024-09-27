@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 20:41:49 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/01/05 22:59:22 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:10:56 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ void	ft_printlist(t_parser *parser)
 {
 	while (parser != NULL)
 	{
-		printf("%s				", parser->prev);
-		printf("%s %p \n", parser->str, parser->str);
+		if (!parser->prev)
+			printf("(null)");
+		if ((parser->prev))
+			printf("prev: %s			", parser->prev->str);
+		printf("kendisi: %s 			\n", parser->str);
 		parser = parser->next;
 	}
 }
@@ -40,4 +43,17 @@ void	ft_error(void)
 {
 	printf("Error!");
 	exit(1);
+}
+
+void	ft_free_2d(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

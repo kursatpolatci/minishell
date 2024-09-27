@@ -6,7 +6,7 @@
 /*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 22:24:07 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/01/05 22:46:00 by fatturan         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:55:47 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ void	ft_process(void)
 	char		**split;
 	char		*str;
 
-	//ft_print_split(g_glbl.export);
-	//exit(1);
 	while (1)
 	{
 		str = readline("bash$: ");
@@ -108,6 +106,7 @@ void	ft_process(void)
 		determine_type(parser);
 		check_env(parser);
 		remove_quo_pars(parser);
-		ft_printlist(parser);
+		ft_cmd_box(parser);
+		ft_process_cmd();
 	}
 }

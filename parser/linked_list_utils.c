@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpolatci <kpolatci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fatturan <fa.betulturan@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 22:04:53 by kpolatci          #+#    #+#             */
-/*   Updated: 2024/01/06 05:37:45 by kpolatci         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:07:07 by fatturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_nodeadd_back(t_parser **pars, t_parser *new)
 	ft_nodelast(*pars)->next = new;
 }
 
-t_parser	*ft_nodenew(char *str, t_parser *prev)
+t_parser	*ft_nodenew(char *str)
 {
 	t_parser	*new;
 
@@ -38,7 +38,6 @@ t_parser	*ft_nodenew(char *str, t_parser *prev)
 		return (NULL);
 	new->str = str;
 	new->next = NULL;
-	new->prev = ft_nodelast(prev);
 	return (new);
 }
 
@@ -68,15 +67,15 @@ void	ft_add_prev_parser(t_parser	*parser)
 	}
 }
 
-int	ft_arg_count(t_parser *main)
+int	ft_arg_count(t_execute *exec)
 {
 	int	len;
 
 	len = 0;
-	while (main->next)
+	while (exec->next)
 	{
 		len++;
-		main = main->next;
+		exec = exec->next;
 	}
 	return (len);
 }
